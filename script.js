@@ -74,60 +74,30 @@ async function loadQuestions() {
     }
 }
 
-// הגדרת שאלות fallback במקרה שלא ניתן לטעון את ה-JSON
+// הגדרת שאלות fallback בסיסיות במקרה שלא ניתן לטעון את ה-JSON
 function setupFallbackQuestions() {
     questionBank = {
         geography: {
             expert: [
                 {
-                    question: "מהי הבירה של קולומביה הבריטית?",
-                    answers: ["ונקובר", "ויקטוריה", "קלגרי", "טורונטו"],
-                    correct: 1,
-                    fact: "ויקטוריה היא הבירה של קולומביה הבריטית, אך ונקובר היא העיר הגדולה ביותר במחוז."
+                    question: "מהי הבירה של קנדה?",
+                    answers: ["טורונטו", "מונטריאול", "אוטווה", "ונקובר"],
+                    correct: 2,
+                    fact: "אוטווה היא הבירה של קנדה."
                 },
                 {
                     question: "איזה מחוז קנדי הוא הגדול ביותר בשטח?",
                     answers: ["אונטריו", "קוויבק", "קולומביה הבריטית", "אלברטה"],
                     correct: 1,
-                    fact: "קוויבק הוא המחוז הגדול ביותר בקנדה, עם שטח של יותר מ-1.5 מיליון קמ\"ר."
-                },
-                {
-                    question: "איזה אוקיינוס נמצא ממזרח לקנדה?",
-                    answers: ["האוקיינוס השקט", "האוקיינוס הארקטי", "האוקיינוס האטלנטי", "האוקיינוס ההודי"],
-                    correct: 2,
-                    fact: "האוקיינוס האטלנטי נמצא ממזרח לקנדה, והמחוזות הימיים גובלים בו."
-                },
-                {
-                    question: "מהו הנהר הארוך ביותר בקנדה?",
-                    answers: ["נהר האסקצ'ואן", "נהר מקנזי", "נהר סנט לורנס", "נהר אוטווה"],
-                    correct: 1,
-                    fact: "נהר מקנזי הוא הנהר הארוך ביותר בקנדה, באורך של 4,241 קילומטר."
-                },
-                {
-                    question: "איזה מחוז מכונה 'מחוז הערבה'?",
-                    answers: ["אלברטה", "ססקצ'ואן", "מניטובה", "אונטריו"],
-                    correct: 1,
-                    fact: "ססקצ'ואן מכונה 'מחוז הערבה' בזכות השטחים החקלאיים הנרחבים שלו."
+                    fact: "קוויבק הוא המחוז הגדול ביותר בקנדה."
                 }
             ],
             junior: [
-                {
-                    question: "מהי הבירה של קנדה?",
-                    answers: ["טורונטו", "מונטריאול", "אוטווה", "ונקובר"],
-                    correct: 2,
-                    fact: "אוטווה היא הבירה של קנדה ונמצאת במחוז אונטריו."
-                },
                 {
                     question: "כמה אוקיינוסים גובלים בקנדה?",
                     answers: ["1", "2", "3", "4"],
                     correct: 2,
                     fact: "שלושה אוקיינוסים גובלים בקנדה: האטלנטי, השקט והארקטי."
-                },
-                {
-                    question: "איזה צבע נמצא בדגל קנדה?",
-                    answers: ["כחול", "ירוק", "אדום", "צהוב"],
-                    correct: 2,
-                    fact: "הדגל הקנדי הוא אדום ולבן עם עלה אדר אדום במרכז."
                 }
             ]
         },
@@ -137,22 +107,10 @@ function setupFallbackQuestions() {
                     question: "באיזו שנה הוקמה הקונפדרציה הקנדית?",
                     answers: ["1865", "1867", "1869", "1871"],
                     correct: 1,
-                    fact: "הקונפדרציה הקנדית הוקמה ב-1867 כאשר ארבעה מחוזות התאחדו."
-                },
-                {
-                    question: "מי היה ראש הממשלה הראשון של קנדה?",
-                    answers: ["ג'ון א. מקדונלד", "ויילפריד לורייה", "רוברט בורדן", "וויליאם לאיון מקנזי"],
-                    correct: 0,
-                    fact: "סר ג'ון א. מקדונלד היה ראש הממשלה הראשון של קנדה."
+                    fact: "הקונפדרציה הקנדית הוקמה ב-1867."
                 }
             ],
             junior: [
-                {
-                    question: "איזה חיה מופיעה על המטבע הקנדי?",
-                    answers: ["דוב", "צבי", "כבשה", "אריה"],
-                    correct: 1,
-                    fact: "צבי מופיע על מטבעות קנדיים רבים והוא סמל לקנדה."
-                },
                 {
                     question: "מה שמו של המלך הנוכחי של קנדה?",
                     answers: ["המלך צ'ארלס השלישי", "המלכה אליזבת השנייה", "המלך ג'ורג'", "אין מלך לקנדה"],
@@ -167,19 +125,7 @@ function setupFallbackQuestions() {
                     question: "מהו הספורט הלאומי של קנדה בחורף?",
                     answers: ["סקי", "החלקה על קרח", "הוקי קרח", "קרלינג"],
                     correct: 2,
-                    fact: "הוקי קרח הוא הספורט הלאומי של קנדה בחורף, ולקרוס בקיץ."
-                },
-                {
-                    question: "מהו הפארק הלאומי הראשון של קנדה?",
-                    answers: ["פארק בנף", "פארק אלגונקווין", "פארק ג'ספר", "פארק יוהו"],
-                    correct: 0,
-                    fact: "פארק בנף הוא הפארק הלאומי הראשון של קנדה, שהוקם ב-1885."
-                },
-                {
-                    question: "איזה מאכל קנדי מפורסם עשוי מתפוחי אדמה, גבינה ורוטב?",
-                    answers: ["מייפל סירופ", "פוטין", "טורטיר", "נאנמו בר"],
-                    correct: 1,
-                    fact: "פוטין הוא מאכל קנדי מפורסם שמקורו בקוויבק."
+                    fact: "הוקי קרח הוא הספורט הלאומי של קנדה בחורף."
                 }
             ],
             junior: [
@@ -187,29 +133,17 @@ function setupFallbackQuestions() {
                     question: "איזה חיה גדולה חיה ביערות קנדה?",
                     answers: ["פיל", "דוב", "אריה", "ג'ירף"],
                     correct: 1,
-                    fact: "דובים חיים ביערות קנדה, כולל דובים שחורים ודובי גריזלי."
-                },
-                {
-                    question: "מה הצבע של עלי האדר בסתיו?",
-                    answers: ["ירוק", "כחול", "אדום", "סגול"],
-                    correct: 2,
-                    fact: "עלי האדר הופכים לאדומים יפים בסתיו הקנדי."
+                    fact: "דובים חיים ביערות קנדה."
                 }
             ]
         },
         arts: {
             expert: [
                 {
-                    question: "מי כתב את השיר הלאומי הקנדי 'או קנדה'?",
-                    answers: ["קליקסה לאבליה", "רוברט סטנלי וויר", "אדולף-בזיל רותייה", "כל התשובות נכונות"],
-                    correct: 3,
-                    fact: "השיר הלאומי נכתב על ידי כמה אנשים: המוסיקה על ידי לאבליה והמילים על ידי רותייה ווויר."
-                },
-                {
                     question: "איזה צייר קנדי מפורסם בציוריו של נופי קנדה?",
                     answers: ["טום תומסון", "לורן האריס", "A.Y. ג'קסון", "כולם"],
                     correct: 3,
-                    fact: "כל אלה היו חברים בקבוצת השבעה - צייירי נוף קנדיים מפורסמים."
+                    fact: "כל אלה היו חברים בקבוצת השבעה."
                 }
             ],
             junior: [
@@ -223,7 +157,7 @@ function setupFallbackQuestions() {
         }
     };
     
-    console.log('נטענו שאלות fallback מובנות במקום קובץ JSON');
+    console.log('נטענו שאלות fallback בסיסיות (8 שאלות) במקום קובץ JSON');
 }
 
 function initializeGame() {
@@ -234,6 +168,9 @@ function initializeGame() {
 function setupEventListeners() {
     document.getElementById('addPlayer').addEventListener('click', addPlayer);
     document.getElementById('startGame').addEventListener('click', startGame);
+    document.getElementById('showInstructions').addEventListener('click', showInstructions);
+    document.getElementById('closeInstructions').addEventListener('click', hideInstructions);
+    document.getElementById('startPlayingBtn').addEventListener('click', hideInstructions);
     document.getElementById('spinButton').addEventListener('click', spinWheel);
     document.getElementById('menuButton').addEventListener('click', showMenu);
     document.getElementById('newGameButton').addEventListener('click', newGame);
@@ -685,3 +622,19 @@ function exitGame() {
         window.close();
     }
 }
+
+function showInstructions() {
+    document.getElementById('instructionsModal').style.display = 'flex';
+}
+
+function hideInstructions() {
+    document.getElementById('instructionsModal').style.display = 'none';
+}
+
+// סגירת מודל ההוראות בלחיצה על הרקע
+document.addEventListener('click', function(event) {
+    const instructionsModal = document.getElementById('instructionsModal');
+    if (event.target === instructionsModal) {
+        hideInstructions();
+    }
+});
