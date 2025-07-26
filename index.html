@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>טריוויה קנדית - מהדורת משפחה</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="gameContainer">
+        <!-- מסך התחלה -->
+        <div id="startScreen">
+            <h1>טריוויה קנדית</h1>
+            <h2>מהדורת משפחה</h2>
+            <div class="player-setup">
+                <h3>הגדרת שחקנים</h3>
+                <div id="playerInputs">
+                    <div class="player-input">
+                        <label>שחקן 1:</label>
+                        <input type="text" id="player1Name" placeholder="שם השחקן">
+                        <select id="player1Age">
+                            <option value="junior">ילד (שאלות קלות)</option>
+                            <option value="expert">מבוגר (שאלות קשות)</option>
+                        </select>
+                        <div class="color-picker">
+                            <input type="radio" name="player1Color" value="red" id="p1red" checked>
+                            <label for="p1red" class="color-option red"></label>
+                            <input type="radio" name="player1Color" value="blue" id="p1blue">
+                            <label for="p1blue" class="color-option blue"></label>
+                            <input type="radio" name="player1Color" value="green" id="p1green">
+                            <label for="p1green" class="color-option green"></label>
+                            <input type="radio" name="player1Color" value="yellow" id="p1yellow">
+                            <label for="p1yellow" class="color-option yellow"></label>
+                        </div>
+                    </div>
+                    <div class="player-input">
+                        <label>שחקן 2:</label>
+                        <input type="text" id="player2Name" placeholder="שם השחקן">
+                        <select id="player2Age">
+                            <option value="junior">ילד (שאלות קלות)</option>
+                            <option value="expert">מבוגר (שאלות קשות)</option>
+                        </select>
+                        <div class="color-picker">
+                            <input type="radio" name="player2Color" value="red" id="p2red">
+                            <label for="p2red" class="color-option red"></label>
+                            <input type="radio" name="player2Color" value="blue" id="p2blue" checked>
+                            <label for="p2blue" class="color-option blue"></label>
+                            <input type="radio" name="player2Color" value="green" id="p2green">
+                            <label for="p2green" class="color-option green"></label>
+                            <input type="radio" name="player2Color" value="yellow" id="p2yellow">
+                            <label for="p2yellow" class="color-option yellow"></label>
+                        </div>
+                    </div>
+                </div>
+                <button id="addPlayer">הוסף שחקן</button>
+                <button id="startGame">התחל משחק</button>
+            </div>
+        </div>
+
+        <!-- מסך המשחק הראשי -->
+        <div id="gameScreen" style="display: none;">
+            <!-- פאנל מידע עליון -->
+            <div id="gameHeader">
+                <div id="currentPlayer">תור: <span id="currentPlayerName"></span></div>
+                <div id="gameMode">מצב משחק: קלאסי</div>
+                <button id="menuButton">תפריט</button>
+            </div>
+
+            <!-- אזור הלוח -->
+            <div id="gameBoard">
+                <div id="canadaMap">
+                    <!-- ערים ומחוזות -->
+                    <div class="city" id="ottawa" data-province="אוטווה" style="left: 75%; top: 65%;">
+                        <div class="city-marker start"></div>
+                        <span class="city-name">אוטווה</span>
+                    </div>
+                    <div class="city" id="toronto" data-province="אונטריו" style="left: 72%; top: 68%;">
+                        <div class="city-marker"></div>
+                        <span class="city-name">טורונטו</span>
+                    </div>
+                    <div class="city" id="montreal" data-province="קוויבק" style="left: 78%; top: 62%;">
+                        <div class="city-marker"></div>
+                        <span class="city-name">מונטריאול</span>
+                    </div>
+                    <div class="city" id="vancouver" data-province="קולומביה הבריטית" style="left: 15%; top: 55%;">
+                        <div class="city-marker"></div>
+                        <span class="city-name">ונקובר</span>
+                    </div>
+                    <div class="city" id="calgary" data-province="אלברטה" style="left: 35%; top: 58%;">
+                        <div class="city-marker"></div>
+                        <span class="city-name">קלגרי</span>
+                    </div>
+                    <div class="city" id="winnipeg" data-province="מניטובה" style="left: 55%; top: 62%;">
+                        <div class="city-marker"></div>
+                        <span class="city-name">וויניפג</span>
+                    </div>
+                    <div class="city" id="halifax" data-province="נובה סקוטיה" style="left: 88%; top: 68%;">
+                        <div class="city-marker"></div>
+                        <span class="city-name">הליפקס</span>
+                    </div>
+                    <div class="city" id="charlottetown" data-province="אי הנסיך אדוארד" style="left: 85%; top: 65%;">
+                        <div class="city-marker"></div>
+                        <span class="city-name">שארלוטטאון</span>
+                    </div>
+                    <div class="city" id="fredericton" data-province="ניו ברנזוויק" style="left: 82%; top: 67%;">
+                        <div class="city-marker"></div>
+                        <span class="city-name">פרדריקטון</span>
+                    </div>
+                    <div class="city" id="stjohns" data-province="ניופאונדלנד ולברדור" style="left: 92%; top: 58%;">
+                        <div class="city-marker"></div>
+                        <span class="city-name">סנט ג'ונס</span>
+                    </div>
+                    <div class="city" id="regina" data-province="ססקצ'ואן" style="left: 45%; top: 65%;">
+                        <div class="city-marker"></div>
+                        <span class="city-name">רג'ינה</span>
+                    </div>
+                    <div class="city" id="whitehorse" data-province="יוקון" style="left: 10%; top: 25%;">
+                        <div class="city-marker"></div>
+                        <span class="city-name">ווייטהורס</span>
+                    </div>
+                    <div class="city" id="yellowknife" data-province="הטריטוריות הצפון-מערביות" style="left: 35%; top: 35%;">
+                        <div class="city-marker"></div>
+                        <span class="city-name">ילונייף</span>
+                    </div>
+
+                    <!-- שבילים -->
+                    <svg class="paths" viewBox="0 0 100 100">
+                        <path d="M15 55 Q25 60 35 58" stroke="#8B4513" stroke-width="0.5" fill="none"/>
+                        <path d="M35 58 Q45 62 55 62" stroke="#8B4513" stroke-width="0.5" fill="none"/>
+                        <path d="M55 62 Q65 64 75 65" stroke="#8B4513" stroke-width="0.5" fill="none"/>
+                        <path d="M75 65 Q76 64 78 62" stroke="#8B4513" stroke-width="0.5" fill="none"/>
+                        <path d="M78 62 Q80 65 82 67" stroke="#8B4513" stroke-width="0.5" fill="none"/>
+                        <path d="M82 67 Q85 66 88 68" stroke="#8B4513" stroke-width="0.5" fill="none"/>
+                        <path d="M35 35 Q35 45 35 58" stroke="#8B4513" stroke-width="0.5" fill="none"/>
+                        <path d="M10 25 Q22 30 35 35" stroke="#8B4513" stroke-width="0.5" fill="none"/>
+                    </svg>
+
+                    <!-- שחקנים -->
+                    <div id="players"></div>
+                </div>
+
+                <!-- פאנל צדדי -->
+                <div id="sidePanel">
+                    <!-- רולטה -->
+                    <div id="spinnerContainer">
+                        <h3>רולטה</h3>
+                        <div id="spinner">
+                            <div class="spinner-section geography" data-category="geography">גיאוגרפיה</div>
+                            <div class="spinner-section history" data-category="history">היסטוריה</div>
+                            <div class="spinner-section general" data-category="general">כללי</div>
+                            <div class="spinner-section arts" data-category="arts">אמנות</div>
+                            <div class="spinner-section choice" data-category="choice">בחירה</div>
+                            <div class="spinner-section move" data-category="move">תזוזה</div>
+                            <div class="spinner-arrow"></div>
+                        </div>
+                        <button id="spinButton">סובב!</button>
+                    </div>
+
+                    <!-- מידע שחקנים -->
+                    <div id="playersInfo">
+                        <h3>שחקנים</h3>
+                        <div id="playersList"></div>
+                    </div>
+
+                    <!-- אוסף טוקנים -->
+                    <div id="tokensCollection">
+                        <h3>טוקנים שנאספו</h3>
+                        <div id="currentPlayerTokens"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- חלון שאלה -->
+        <div id="questionModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span id="questionCategory"></span>
+                    <span id="questionDifficulty"></span>
+                </div>
+                <div id="questionText"></div>
+                <div id="questionAnswers"></div>
+                <div id="questionResult" style="display: none;"></div>
+                <button id="nextButton" style="display: none;">המשך</button>
+            </div>
+        </div>
+
+        <!-- חלון ניצחון -->
+        <div id="winModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>🎉 מזל טוב! 🎉</h2>
+                <div id="winMessage"></div>
+                <button id="newGameButton">משחק חדש</button>
+                <button id="exitButton">יציאה</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
