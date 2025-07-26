@@ -53,6 +53,7 @@
                     </div>
                 </div>
                 <button id="addPlayer">הוסף שחקן</button>
+                <button id="showInstructions">📋 הוראות המשחק</button>
                 <button id="startGame">התחל משחק</button>
             </div>
         </div>
@@ -123,16 +124,29 @@
                         <span class="city-name">ילונייף</span>
                     </div>
 
-                    <!-- שבילים -->
+                    <!-- שבילים משופרים -->
                     <svg class="paths" viewBox="0 0 100 100">
-                        <path d="M15 55 Q25 60 35 58" stroke="#8B4513" stroke-width="0.5" fill="none"/>
-                        <path d="M35 58 Q45 62 55 62" stroke="#8B4513" stroke-width="0.5" fill="none"/>
-                        <path d="M55 62 Q65 64 75 65" stroke="#8B4513" stroke-width="0.5" fill="none"/>
-                        <path d="M75 65 Q76 64 78 62" stroke="#8B4513" stroke-width="0.5" fill="none"/>
-                        <path d="M78 62 Q80 65 82 67" stroke="#8B4513" stroke-width="0.5" fill="none"/>
-                        <path d="M82 67 Q85 66 88 68" stroke="#8B4513" stroke-width="0.5" fill="none"/>
-                        <path d="M35 35 Q35 45 35 58" stroke="#8B4513" stroke-width="0.5" fill="none"/>
-                        <path d="M10 25 Q22 30 35 35" stroke="#8B4513" stroke-width="0.5" fill="none"/>
+                        <!-- חוף מערבי -->
+                        <path d="M8 50 Q15 48 25 55" stroke="#8B4513" stroke-width="2" fill="none"/>
+                        <!-- מערב לאמצע -->
+                        <path d="M25 55 Q35 56 50 58" stroke="#8B4513" stroke-width="2" fill="none"/>
+                        <!-- פרירי -->
+                        <path d="M25 55 L40 60" stroke="#8B4513" stroke-width="2" fill="none"/>
+                        <path d="M40 60 L50 58" stroke="#8B4513" stroke-width="2" fill="none"/>
+                        <!-- אמצע למזרח -->
+                        <path d="M50 58 Q60 59 73 65" stroke="#8B4513" stroke-width="2" fill="none"/>
+                        <path d="M73 65 Q75 62 76 60" stroke="#8B4513" stroke-width="2" fill="none"/>
+                        <path d="M76 60 Q78 59 80 58" stroke="#8B4513" stroke-width="2" fill="none"/>
+                        <!-- חוף מזרחי -->
+                        <path d="M80 58 Q83 60 85 64" stroke="#8B4513" stroke-width="2" fill="none"/>
+                        <path d="M85 64 Q87 63 90 65" stroke="#8B4513" stroke-width="2" fill="none"/>
+                        <path d="M90 65 Q92 60 95 55" stroke="#8B4513" stroke-width="2" fill="none"/>
+                        <!-- צפון -->
+                        <path d="M5 25 Q15 28 25 30" stroke="#8B4513" stroke-width="2" fill="none"/>
+                        <path d="M25 30 Q25 40 25 55" stroke="#8B4513" stroke-width="2" fill="none"/>
+                        <!-- קווים מחברים נוספים -->
+                        <path d="M73 65 L76 60" stroke="#8B4513" stroke-width="2" fill="none"/>
+                        <path d="M87 62 L90 65" stroke="#8B4513" stroke-width="2" fill="none"/>
                     </svg>
 
                     <!-- שחקנים -->
@@ -167,6 +181,85 @@
                         <h3>טוקנים שנאספו</h3>
                         <div id="currentPlayerTokens"></div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- חלון הוראות המשחק -->
+        <div id="instructionsModal" class="modal" style="display: none;">
+            <div class="modal-content instructions-content">
+                <div class="modal-header">
+                    <h2>🍁 הוראות המשחק - טריוויה קנדית 🍁</h2>
+                    <button id="closeInstructions" class="close-btn">✕</button>
+                </div>
+                
+                <div class="instructions-body">
+                    <div class="instruction-section">
+                        <h3>🎯 מטרת המשחק</h3>
+                        <p>להיות השחקן הראשון שאוסף <strong>5 טוקנים מחוזיים</strong> ומגיע לסיום!</p>
+                    </div>
+
+                    <div class="instruction-section">
+                        <h3>🎮 איך משחקים?</h3>
+                        <ol>
+                            <li><strong>הגדרה:</strong> בחרו 2-6 שחקנים, שמות וצבעים</li>
+                            <li><strong>התחלה:</strong> כל השחקנים מתחילים באוטווה (הנקודה הירוקה)</li>
+                            <li><strong>תור שחקן:</strong> לחצו על "סובב!" כדי לסובב את הרולטה</li>
+                            <li><strong>ענו על השאלה:</strong> לפי הקטגוריה שיצאה</li>
+                            <li><strong>תזוזה:</strong> תשובה נכונה = 2 צעדים, לא נכונה = 1 צעד</li>
+                        </ol>
+                    </div>
+
+                    <div class="instruction-section">
+                        <h3>🎡 הרולטה - 6 קטגוריות</h3>
+                        <div class="spinner-legend">
+                            <div class="legend-item"><span class="legend-color geography"></span>גיאוגרפיה - מפות וערים</div>
+                            <div class="legend-item"><span class="legend-color history"></span>היסטוריה - אירועים ואישים</div>
+                            <div class="legend-item"><span class="legend-color general"></span>כללי - תרבות וספורט</div>
+                            <div class="legend-item"><span class="legend-color arts"></span>אמנות - מוזיקה וספרות</div>
+                            <div class="legend-item"><span class="legend-color choice"></span>בחירה - תבחרו קטגוריה</div>
+                            <div class="legend-item"><span class="legend-color move"></span>תזוזה - 2 צעדים חינם!</div>
+                        </div>
+                    </div>
+
+                    <div class="instruction-section">
+                        <h3>🏆 איסוף טוקנים</h3>
+                        <p>כשאתם נוחתים על <strong>בירת מחוז</strong> (נקודה גדולה), אתם אוספים טוקן של המחוז הזה!</p>
+                        <ul>
+                            <li>כל מחוז ניתן לאיסוף פעם אחת בלבד לכל שחקן</li>
+                            <li>13 מחוזים וטריטוריות זמינים לאיסוף</li>
+                            <li>השחקן הראשון ל-5 טוקנים מנצח! 🎉</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-section">
+                        <h3>⚡ כללים מיוחדים</h3>
+                        <ul>
+                            <li><strong>רמות קושי:</strong> ילדים = שאלות קלות, מבוגרים = שאלות קשות</li>
+                            <li><strong>סובב סגול:</strong> תזוזה של 2 מקומות ללא שאלה</li>
+                            <li><strong>סובב בחירה:</strong> אתם בוחרים איזו קטגוריה שאלה תרצו</li>
+                            <li><strong>עובדות מעניינות:</strong> אחרי כל שאלה תלמדו משהו חדש על קנדה!</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-section">
+                        <h3>🗺️ המפה</h3>
+                        <p>המפה מציגה את קנדה עם הערים הגדולות. השבילים החומים מחברים בין הערים. השחקנים נעים לאורך השבילים בכיוון השעון.</p>
+                    </div>
+
+                    <div class="instruction-section tips-section">
+                        <h3>💡 טיפים לניצחון</h3>
+                        <ul>
+                            <li>למדו על גיאוגרפיה קנדית - הרבה שאלות על ערים ומחוזות</li>
+                            <li>זכרו תאריכים חשובים כמו 1867 (הקונפדרציה)</li>
+                            <li>שימו לב לסמלים קנדיים: אדר, בובר, הוקי</li>
+                            <li>תשובה נכונה = תזוזה מהירה יותר!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="instructions-footer">
+                    <button id="startPlayingBtn" class="start-playing-btn">בואו נתחיל לשחק! 🎮</button>
                 </div>
             </div>
         </div>
