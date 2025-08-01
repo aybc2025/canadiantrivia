@@ -15,24 +15,46 @@
         }
 
         .tutorial-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-red));
             color: white;
             padding: 40px;
             border-radius: var(--border-radius);
             text-align: center;
             margin-bottom: 32px;
             box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tutorial-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
         }
 
         .tutorial-header h1 {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
         }
 
         .tutorial-header p {
             font-size: 1.25rem;
             opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
 
         .tutorial-section {
@@ -42,6 +64,18 @@
             padding: 32px;
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tutorial-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-red));
         }
 
         .tutorial-section h2 {
@@ -49,12 +83,15 @@
             font-size: 1.75rem;
             font-weight: 600;
             margin-bottom: 20px;
-            border-right: 4px solid var(--primary-color);
+            border-right: 4px solid var(--accent-red);
             padding-right: 16px;
         }
 
         .tutorial-section h3 {
-            color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-size: 1.25rem;
             font-weight: 600;
             margin: 24px 0 16px 0;
@@ -73,11 +110,11 @@
         }
 
         .step-list li {
-            background: var(--background-color);
+            background: linear-gradient(135deg, var(--background-color), #fef2f2);
             margin: 16px 0;
             padding: 20px;
             border-radius: var(--border-radius);
-            border-right: 4px solid var(--success-color);
+            border-right: 4px solid var(--accent-red);
             display: flex;
             align-items: flex-start;
             gap: 16px;
@@ -90,7 +127,7 @@
         }
 
         .step-number {
-            background: var(--success-color);
+            background: linear-gradient(135deg, var(--accent-red), #dc2626);
             color: white;
             width: 32px;
             height: 32px;
@@ -128,10 +165,29 @@
             padding: 20px;
             text-align: center;
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mode-demo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-red));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: right;
+        }
+
+        .mode-demo:hover::before {
+            transform: scaleX(1);
         }
 
         .mode-demo:hover {
-            border-color: var(--primary-color);
+            border-color: var(--accent-red);
             transform: translateY(-2px);
             box-shadow: var(--shadow-md);
         }
@@ -167,6 +223,25 @@
             text-align: center;
             border: 2px solid var(--border-color);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-showcase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-red));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: right;
+        }
+
+        .category-showcase:hover::before {
+            transform: scaleX(1);
         }
 
         .category-showcase:hover {
@@ -178,7 +253,7 @@
         .category-showcase.history { border-color: #2563eb; }
         .category-showcase.culture { border-color: #9333ea; }
         .category-showcase.science { border-color: #ea580c; }
-        .category-showcase.sport { border-color: #dc2626; }
+        .category-showcase.sport { border-color: var(--accent-red); }
         .category-showcase.food { border-color: #ca8a04; }
         .category-showcase.nature { border-color: #059669; }
         .category-showcase.celebrities { border-color: #7c3aed; }
@@ -225,6 +300,25 @@
             border-radius: var(--border-radius);
             border-right: 4px solid var(--warning-color);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tip-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--warning-color), var(--accent-red));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: right;
+        }
+
+        .tip-card:hover::before {
+            transform: scaleX(1);
         }
 
         .tip-card:hover {
@@ -251,6 +345,18 @@
             padding: 24px;
             margin: 24px 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #0ea5e9, var(--accent-red));
         }
 
         .feature-highlight h4 {
@@ -271,7 +377,7 @@
         }
 
         .action-btn {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-red));
             color: white;
             padding: 16px 32px;
             border: none;
@@ -287,7 +393,7 @@
         }
 
         .action-btn:hover {
-            background: var(--primary-hover);
+            background: linear-gradient(135deg, var(--primary-hover), #dc2626);
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
@@ -307,6 +413,18 @@
             margin: 32px 0;
             text-align: center;
             border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-demo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-red));
         }
 
         .demo-question-card {
@@ -350,12 +468,12 @@
 
         .demo-btn.hard {
             background: var(--surface-color);
-            border-color: var(--error-color);
-            color: var(--error-color);
+            border-color: var(--accent-red);
+            color: var(--accent-red);
         }
 
         .demo-btn.hard:hover {
-            background: var(--error-color);
+            background: var(--accent-red);
             color: white;
         }
 
@@ -380,11 +498,11 @@
 
         .demo-option:hover {
             border-color: var(--primary-color);
-            background: #eff6ff;
+            background: linear-gradient(135deg, #eff6ff, #ffffff);
         }
 
         .demo-option.selected {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-red));
             color: white;
             border-color: var(--primary-color);
         }
@@ -396,9 +514,9 @@
         }
 
         .demo-option.wrong {
-            background: var(--error-color);
+            background: var(--accent-red);
             color: white;
-            border-color: var(--error-color);
+            border-color: var(--accent-red);
         }
 
         .demo-result {
@@ -408,6 +526,18 @@
             margin-top: 20px;
             border: 1px solid var(--border-color);
             text-align: right;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-result::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--success-color), var(--accent-red));
         }
 
         .demo-result strong {
@@ -417,6 +547,43 @@
         .demo-result em {
             color: var(--text-secondary);
             font-style: italic;
+        }
+
+        .new-features {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 2px solid var(--accent-red);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            margin: 32px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .new-features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-red), #dc2626);
+        }
+
+        .new-features h3 {
+            color: #b91c1c;
+            margin-bottom: 16px;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .new-features ul {
+            margin-right: 20px;
+            color: #7f1d1d;
+        }
+
+        .new-features li {
+            margin-bottom: 8px;
+            line-height: 1.6;
         }
 
         @media (max-width: 768px) {
@@ -456,6 +623,18 @@
             <p>למד איך להשתמש בכל התכונות החדשות והמתקדמות!</p>
         </header>
 
+        <section class="tutorial-section new-features">
+            <h3>🆕 מה חדש במהדורה המורחבת?</h3>
+            <ul>
+                <li><strong>יותר מ-1500 שאלות חדשות</strong> - מאגר שאלות עצום על קנדה</li>
+                <li><strong>מצב רב-משתתפים משופר</strong> - לכל שחקן מגדל נפרד</li>
+                <li><strong>סיפורים קנדיים מורחבים</strong> - סיפורים ארוכים ומפורטים</li>
+                <li><strong>מילון מונחים עם תרגומים</strong> - מונחים קנדיים בעברית ובאנגלית</li>
+                <li><strong>עיצוב מודרני</strong> - גוונים אדומים ואנימציות</li>
+                <li><strong>תוכן על עמים ילידיים</strong> - קטגוריה ייעודית עם סיפורים</li>
+            </ul>
+        </section>
+
         <section class="tutorial-section">
             <h2>🎮 מצבי המשחק</h2>
             <p>המשחק המחודש כולל 5 מצבים שונים לחוויית למידה מגוונת ומעשירה:</p>
@@ -469,7 +648,7 @@
                 <div class="mode-demo">
                     <div class="mode-demo-icon">👥</div>
                     <h4>רב משתתפים</h4>
-                    <p>עד 4 שחקנים יכולים להתחרות יחד לבניית המגדל הטוב ביותר</p>
+                    <p>עד 4 שחקנים יכולים להתחרות יחד - לכל שחקן מגדל נפרד!</p>
                 </div>
                 <div class="mode-demo">
                     <div class="mode-demo-icon">📖</div>
@@ -479,19 +658,19 @@
                 <div class="mode-demo">
                     <div class="mode-demo-icon">📚</div>
                     <h4>סיפורים קנדיים</h4>
-                    <p>קרא סיפורים מעניינים על ההיסטוריה והתרבות הקנדית</p>
+                    <p>קרא סיפורים ארוכים ומפורטים על ההיסטוריה והתרבות הקנדית</p>
                 </div>
                 <div class="mode-demo">
                     <div class="mode-demo-icon">📝</div>
                     <h4>מילון מונחים</h4>
-                    <p>למד מונחים ייחודיים לתרבות הקנדית</p>
+                    <p>למד מונחים ייחודיים לתרבות הקנדית עם תרגומים לעברית</p>
                 </div>
             </div>
         </section>
 
         <section class="tutorial-section">
             <h2>📚 קטגוריות השאלות המורחבות</h2>
-            <p>המשחק כולל כעת 9 קטגוריות עשירות עם למעלה מ-1000 שאלות:</p>
+            <p>המשחק כולל כעת 9 קטגוריות עשירות עם יותר מ-1500 שאלות חדשות:</p>
             
             <div class="categories-showcase">
                 <div class="category-showcase geography">
@@ -519,7 +698,7 @@
                     <div class="category-icon-large">🔬</div>
                     <h4>מדע וכלליות</h4>
                     <p>המצאות קנדיות, טכנולוגיה ועובדות כלליות</p>
-                    <div class="example-question">"מי המציא את הטלפון?"</div>
+                    <div class="example-question">"מי המציא את הטלפון בקנדה?"</div>
                 </div>
                 
                 <div class="category-showcase sport">
@@ -594,7 +773,7 @@
                     <div class="step-number">5</div>
                     <div class="step-content">
                         <div class="step-title">בנה את המגדל</div>
-                        תשובה נכונה מוסיפה כרטיס למגדל (מלמטה למעלה), תשובה שגויה מסירה כרטיסים
+                        תשובה נכונה מוסיפה כרטיס למגדל (מלמעלה למטה), תשובה שגויה מסירה כרטיסים
                     </div>
                 </li>
             </ol>
@@ -619,13 +798,18 @@
             </div>
 
             <div class="feature-highlight">
-                <h4>📚 סיפורים אינטראקטיביים</h4>
-                <p>קרא סיפורים מרתקים על ההיסטוריה הקנדית, התרבות והעמים הילידיים. כל סיפור מותאם לרמת הקושי ומקושר לקטגוריות השונות.</p>
+                <h4>📚 סיפורים אינטראקטיביים מורחבים</h4>
+                <p>קרא סיפורים ארוכים ומרתקים על ההיסטוריה הקנדית, התרבות והעמים הילידיים. כל סיפור מפורט ומעמיק, לא רק משפט אחד.</p>
             </div>
 
             <div class="feature-highlight">
-                <h4>📝 מילון מונחים עשיר</h4>
-                <p>למד מונחים ייחודיים לתרבות הקנדית כמו "פוטין", "לוני", "מאונטי" ועוד. המילון מסביר כל מונח בפירוט.</p>
+                <h4>📝 מילון מונחים עשיר עם תרגומים</h4>
+                <p>למד מונחים ייחודיים לתרבות הקנדית כמו "פוטין", "לוני", "מאונטי" ועוד. המילון כולל גם את השמות בעברית לצד האנגלית.</p>
+            </div>
+
+            <div class="feature-highlight">
+                <h4>👥 מצב רב-משתתפים משופר</h4>
+                <p>במצב רב-משתתפים, כל שחקן מקבל מגדל נפרד! תוכל לראות את ההתקדמות של כל השחקנים בו-זמנית.</p>
             </div>
         </section>
 
@@ -749,7 +933,7 @@
                     <strong>תוצאה:</strong> ${isCorrect ? '✅ נכון!' : '❌ לא נכון'} (${pointsText})<br>
                     <strong>התשובה הנכונה:</strong> אוטווה<br>
                     <strong>הסבר:</strong> אוטווה היא בירת קנדה ונמצאת במחוז אונטריו, על הגבול עם קוויבק.<br>
-                    <em>במשחק האמיתי, ${isCorrect ? 'הכרטיס הזה היה מתווסף עכשיו לתחתית המגדל שלך! 🏗️' : 'כרטיס היה מוסר מתחתית המגדל שלך 😞'}</em>
+                    <em>במשחק האמיתי, ${isCorrect ? 'הכרטיס הזה היה מתווסף עכשיו לראש המגדל שלך! 🏗️' : 'כרטיס היה מוסר מראש המגדל שלך 😞'}</em>
                 `;
                 
                 resultDiv.style.display = 'block';
