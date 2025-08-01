@@ -971,4 +971,167 @@ function resetGame() {
     }
 }
 
-console.log('Hebrew Trivia Tower Enhanced Edition loaded successfully!');
+// Service Worker Registration - הוסף לסוף game.js
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('./sw.js')
+            .then(function(registration) {
+                console.log('✅ Service Worker registered successfully:', registration.scope);
+                
+                // Check for updates
+                registration.addEventListener('updatefound', () => {
+                    const newWorker = registration.installing;
+                    console.log('🔄 New service worker found');
+                    
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            console.log('🆕 New content available');
+                            // New content available, prompt user to refresh
+                            if (confirm('גרסה חדשה זמינה! רוצה לרענן?')) {
+                                window.location.reload();
+                            }
+                        }
+                    });
+                });
+            })
+            .catch(function(registrationError) {
+                console.log('❌ Service Worker registration failed:', registrationError);
+            });
+    });
+} else {
+    console.log('❌ Service Worker not supported');
+}
+
+// PWA Install Prompt Handler
+let deferredPrompt;
+let installButton;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    console.log('📱 PWA install prompt available');
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later
+    deferredPrompt = e;
+    
+    // Show custom install button
+    showInstallButton();
+});
+
+function showInstallButton() {
+    console.log('👆 Showing install button');
+    // Create install button if it doesn't exist
+    if (!installButton) {
+        installButton = document.createElement('button');
+        installButton.textContent = '📱 התקן אפליקציה';
+        installButton.className = 'install-btn';
+        installButton.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--primary-color, #2563eb);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            z-index: 1000;
+            font-family: inherit;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            animation: slideInUp 0.3s ease;
+        `;
+        
+        // Add animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInUp {
+                from {
+                    transform: translateY(100px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        installButton.addEventListener('mouseover', () => {
+            installButton.style.transform = 'scale(1.05)';
+            installButton.style.boxShadow = '0 6px 16px rgba(37, 99, 235, 0.4)';
+        });
+        
+        installButton.addEventListener('mouseout', () => {
+            installButton.style.transform = 'scale(1)';
+            installButton.style.boxShadow = '0 4px 12px rgba(37, 99, 235, 0.3)';
+        });
+        
+        installButton.addEventListener('click', installApp);
+        document.body.appendChild(installButton);
+    }
+    
+    installButton.style.display = 'block';
+}
+
+function installApp() {
+    console.log('🚀 Install app clicked');
+    if (deferredPrompt) {
+        // Show the install prompt
+        deferredPrompt.prompt();
+        
+        // Wait for the user to respond to the prompt
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('✅ User accepted the install prompt');
+            } else {
+                console.log('❌ User dismissed the install prompt');
+            }
+            deferredPrompt = null;
+            hideInstallButton();
+        });
+    } else {
+        // Fallback for browsers that don't support beforeinstallprompt
+        alert('לצערי, הדפדפן שלך לא תומך בהתקנת PWA אוטומטית.\n\nבכרום: תפריט ⋮ ← "התקן אפליקציה"\nבספארי: כפתור שיתוף ⬆️ ← "הוסף למסך הבית"');
+    }
+}
+
+function hideInstallButton() {
+    if (installButton) {
+        installButton.style.animation = 'slideOutDown 0.3s ease forwards';
+        setTimeout(() => {
+            installButton.style.display = 'none';
+        }, 300);
+    }
+}
+
+// Hide install button if app is already installed
+window.addEventListener('appinstalled', (evt) => {
+    console.log('🎉 App was installed successfully');
+    hideInstallButton();
+});
+
+// Check if app is already installed (running in standalone mode)
+if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+    console.log('📱 App is running in standalone mode');
+    // App is installed, don't show install button
+} else {
+    console.log('🌐 App is running in browser mode');
+}
+
+// Handle URL parameters for direct mode access
+window.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const mode = urlParams.get('mode');
+    
+    if (mode && ['single', 'multiplayer', 'learning', 'stories', 'dictionary'].includes(mode)) {
+        console.log(`🎯 Auto-setting game mode to: ${mode}`);
+        setTimeout(() => {
+            setGameMode(mode);
+        }, 500);
+    }
+});
+
+console.log('🏗️ Hebrew Trivia Tower Enhanced Edition loaded successfully!');
