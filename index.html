@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מגדל הטריוויה העברי - מהדורה מורחבת</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Meta Tags -->
+    <meta name="theme-color" content="#2563eb">
+    <meta name="background-color" content="#ffffff">
+    <meta name="description" content="משחק טריוויה אינטראקטיבי על קנדה בעברית עם סיפורים, מילון מונחים ותוכן על עמים ילידיים">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>🏗️ מגדל הטריוויה הקנדי</h1>
+            <p class="subtitle">למד על קנדה בדרך מהנה ואינטראקטיבית</p>
+        </header>
+
+        <nav class="game-modes">
+            <button class="mode-btn active" onclick="setGameMode('single')">
+                <span class="mode-icon">👤</span>
+                <span>שחקן יחיד</span>
+            </button>
+            <button class="mode-btn" onclick="setGameMode('multiplayer')">
+                <span class="mode-icon">👥</span>
+                <span>רב משתתפים</span>
+            </button>
+            <button class="mode-btn" onclick="setGameMode('learning')">
+                <span class="mode-icon">📖</span>
+                <span>מצב למידה</span>
+            </button>
+            <button class="mode-btn" onclick="setGameMode('stories')">
+                <span class="mode-icon">📚</span>
+                <span>סיפורים</span>
+            </button>
+            <button class="mode-btn" onclick="setGameMode('dictionary')">
+                <span class="mode-icon">📝</span>
+                <span>מילון מונחים</span>
+            </button>
+        </nav>
+
+        <main class="game-main">
+            <div class="game-info">
+                <div class="current-player">
+                    <span>שחקן נוכחי: </span>
+                    <span id="current-player">שחקן 1</span>
+                </div>
+                
+                <div class="game-stats">
+                    <div class="stat">
+                        <span class="stat-label">גובה מגדל</span>
+                        <span class="stat-value" id="tower-height">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">ניקוד</span>
+                        <span class="stat-value" id="current-score">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">שאלות נותרו</span>
+                        <span class="stat-value" id="cards-remaining">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-board">
+                <section class="tower-section">
+                    <div class="tower-container">
+                        <div class="tower-base">
+                            <span>🏗️ בסיס המגדל</span>
+                        </div>
+                        <div class="tower-cards" id="tower-cards">
+                            <!-- Cards will be built from bottom to top -->
+                        </div>
+                    </div>
+                </section>
+
+                <section class="question-section-container">
+                    <div class="question-card">
+                        <div class="card-header">
+                            <div class="card-category" id="card-category">בחר מצב משחק</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-question" id="card-question">בחר מצב משחק כדי להתחיל</p>
+                            
+                            <div class="difficulty-selector" id="difficulty-selector" style="display: none;">
+                                <h3>בחר רמת קושי</h3>
+                                <div class="difficulty-buttons">
+                                    <button class="difficulty-btn easy" onclick="selectDifficulty('junior')">
+                                        <span class="difficulty-icon">🟢</span>
+                                        <span>רמה קלה</span>
+                                        <small>5 נקודות</small>
+                                    </button>
+                                    <button class="difficulty-btn hard" onclick="selectDifficulty('expert')">
+                                        <span class="difficulty-icon">🔴</span>
+                                        <span>רמה קשה</span>
+                                        <small>10 נקודות</small>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="question-section" id="question-section" style="display: none;">
+                                <h3 id="question-title">השאלה</h3>
+                                <p class="question-text" id="question-text"></p>
+                                
+                                <div class="answer-options">
+                                    <button class="option-btn" onclick="selectAnswer(0)" id="option-0"></button>
+                                    <button class="option-btn" onclick="selectAnswer(1)" id="option-1"></button>
+                                    <button class="option-btn" onclick="selectAnswer(2)" id="option-2"></button>
+                                    <button class="option-btn" onclick="selectAnswer(3)" id="option-3"></button>
+                                </div>
+
+                                <div class="timer-container">
+                                    <div class="timer-bar">
+                                        <div class="timer-fill" id="timer-fill"></div>
+                                    </div>
+                                    <span class="timer-text" id="timer-text">30</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="game-controls">
+                        <button class="control-btn primary" onclick="startGame()" id="start-btn">
+                            🎮 התחל משחק
+                        </button>
+                        <button class="control-btn" onclick="pauseGame()" id="pause-btn" style="display: none;">
+                            ⏸️ השהה
+                        </button>
+                        <button class="control-btn" onclick="resetGame()">
+                            🔄 התחל מחדש
+                        </button>
+                    </div>
+                </section>
+            </div>
+
+            <div class="players-container" id="players-container">
+                <!-- Multiplayer info will be displayed here -->
+            </div>
+
+            <div class="category-progress">
+                <h3>התקדמות לפי קטגוריות</h3>
+                <div class="categories-grid">
+                    <div class="category-item">
+                        <span class="category-icon">🌍</span>
+                        <span class="category-name">גיאוגרפיה</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill geography" id="geography-progress"></div>
+                        </div>
+                        <span class="category-count" id="geography-count">0</span>
+                    </div>
+                    
+                    <div class="category-item">
+                        <span class="category-icon">📚</span>
+                        <span class="category-name">היסטוריה</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill history" id="history-progress"></div>
+                        </div>
+                        <span class="category-count" id="history-count">0</span>
+                    </div>
+                    
+                    <div class="category-item">
+                        <span class="category-icon">🎨</span>
+                        <span class="category-name">תרבות</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill culture" id="culture-progress"></div>
+                        </div>
+                        <span class="category-count" id="culture-count">0</span>
+                    </div>
+                    
+                    <div class="category-item">
+                        <span class="category-icon">🔬</span>
+                        <span class="category-name">מדע</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill science" id="science-progress"></div>
+                        </div>
+                        <span class="category-count" id="science-count">0</span>
+                    </div>
+                    
+                    <div class="category-item">
+                        <span class="category-icon">⚽</span>
+                        <span class="category-name">ספורט</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill sport" id="sport-progress"></div>
+                        </div>
+                        <span class="category-count" id="sport-count">0</span>
+                    </div>
+                    
+                    <div class="category-item">
+                        <span class="category-icon">🍁</span>
+                        <span class="category-name">אוכל</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill food" id="food-progress"></div>
+                        </div>
+                        <span class="category-count" id="food-count">0</span>
+                    </div>
+                    
+                    <div class="category-item">
+                        <span class="category-icon">🌲</span>
+                        <span class="category-name">טבע</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill nature" id="nature-progress"></div>
+                        </div>
+                        <span class="category-count" id="nature-count">0</span>
+                    </div>
+                    
+                    <div class="category-item">
+                        <span class="category-icon">⭐</span>
+                        <span class="category-name">מפורסמים</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill celebrities" id="celebrities-progress"></div>
+                        </div>
+                        <span class="category-count" id="celebrities-count">0</span>
+                    </div>
+                    
+                    <div class="category-item">
+                        <span class="category-icon">🪶</span>
+                        <span class="category-name">עמים ילידיים</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill indigenous" id="indigenous-progress"></div>
+                        </div>
+                        <span class="category-count" id="indigenous-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modals -->
+        <div class="modal" id="feedback-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="feedback-title"></h2>
+                </div>
+                <div class="modal-body">
+                    <p id="feedback-text"></p>
+                    <div class="explanation" id="feedback-explanation"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn primary" onclick="closeFeedback()">המשך</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="game-over-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="game-over-title"></h2>
+                </div>
+                <div class="modal-body">
+                    <div id="game-over-content"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn primary" onclick="startGame()">משחק חדש</button>
+                    <button class="btn" onclick="closeModal('game-over-modal')">סגור</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="stories-modal">
+            <div class="modal-content large">
+                <div class="modal-header">
+                    <h2>📚 סיפורים קנדיים</h2>
+                    <button class="close-btn" onclick="closeModal('stories-modal')">×</button>
+                </div>
+                <div class="modal-body">
+                    <div id="stories-list" class="stories-grid">
+                        <!-- Stories will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="story-reader-modal">
+            <div class="modal-content large">
+                <div class="modal-header">
+                    <h2 id="story-title"></h2>
+                    <button class="close-btn" onclick="closeModal('story-reader-modal')">×</button>
+                </div>
+                <div class="modal-body">
+                    <div id="story-content" class="story-content">
+                        <!-- Story content will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" onclick="closeModal('story-reader-modal')">סגור</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="dictionary-modal">
+            <div class="modal-content large">
+                <div class="modal-header">
+                    <h2>📝 מילון מונחים קנדיים</h2>
+                    <button class="close-btn" onclick="closeModal('dictionary-modal')">×</button>
+                </div>
+                <div class="modal-body">
+                    <div id="dictionary-list" class="dictionary-grid">
+                        <!-- Dictionary terms will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
